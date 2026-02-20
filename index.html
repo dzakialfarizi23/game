@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lost Key Adventure 🔑</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- SCREEN: MAIN MENU -->
+    <div id="screen-menu" class="screen active">
+      <div class="menu-bg">
+        <div class="pixel-star" style="top: 10%; left: 8%"></div>
+        <div class="pixel-star" style="top: 25%; left: 92%"></div>
+        <div class="pixel-star" style="top: 60%; left: 5%"></div>
+        <div class="pixel-star" style="top: 75%; left: 88%"></div>
+        <div class="pixel-star" style="top: 45%; left: 50%"></div>
+      </div>
+      <div class="menu-content">
+        <div class="game-title">
+          <span class="title-icon">🔑</span>
+          <h1>LOST KEY<br />ADVENTURE</h1>
+          <span class="title-icon">🗝️</span>
+        </div>
+        <p class="subtitle">Kumpulkan item, temukan kunci,<br />selamatkan dirimu!</p>
+
+        <div class="menu-cards">
+          <div class="menu-card" id="btn-play">
+            <span class="card-icon">▶</span>
+            <span>MAIN</span>
+          </div>
+          <div class="menu-card" id="btn-howto">
+            <span class="card-icon">📖</span>
+            <span>CARA MAIN</span>
+          </div>
+        </div>
+
+        <div class="level-select">
+          <p class="section-label">MULAI DARI LEVEL:</p>
+          <div class="level-buttons">
+            <button class="lvl-btn active" data-level="1">1</button>
+            <button class="lvl-btn" data-level="2">2</button>
+            <button class="lvl-btn" data-level="3">3</button>
+            <button class="lvl-btn" data-level="4">4</button>
+            <button class="lvl-btn" data-level="5">5</button>
+          </div>
+        </div>
+
+        <div class="best-score-box">
+          <span>🏆 BEST: <span id="best-score-menu">0</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN: HOW TO PLAY -->
+    <div id="screen-howto" class="screen">
+      <div class="howto-content">
+        <h2>CARA MAIN</h2>
+        <div class="howto-grid">
+          <div class="howto-item">
+            <span class="howto-icon">⌨️</span>
+            <strong>GERAK</strong>
+            <p>W A S D<br />untuk bergerak</p>
+          </div>
+          <div class="howto-item">
+            <span class="howto-icon">💎</span>
+            <strong>ITEM</strong>
+            <p>Kumpulkan semua<br />orb biru</p>
+          </div>
+          <div class="howto-item">
+            <span class="howto-icon">🔑</span>
+            <strong>KUNCI</strong>
+            <p>Ambil kunci emas<br />di peta</p>
+          </div>
+          <div class="howto-item">
+            <span class="howto-icon">🚪</span>
+            <strong>PINTU</strong>
+            <p>Buka pintu setelah<br />syarat terpenuhi</p>
+          </div>
+          <div class="howto-item">
+            <span class="howto-icon">👾</span>
+            <strong>MONSTER</strong>
+            <p>Hindari monster!<br />3 nyawa tersedia</p>
+          </div>
+          <div class="howto-item">
+            <span class="howto-icon">⭐</span>
+            <strong>SKOR</strong>
+            <p>Selesaikan cepat<br />untuk skor tinggi</p>
+          </div>
+        </div>
+        <div class="difficulty-info">
+          <h3>TINGKAT KESULITAN</h3>
+          <div class="diff-row"><span class="diff-badge lv1">LV 1</span><span>Lambat, 2 monster, peta sederhana</span></div>
+          <div class="diff-row"><span class="diff-badge lv2">LV 2</span><span>Lebih cepat, 3 monster, labirin baru</span></div>
+          <div class="diff-row"><span class="diff-badge lv3">LV 3</span><span>Cepat, 4 monster, 4 item dikumpulkan</span></div>
+          <div class="diff-row"><span class="diff-badge lv4">LV 4</span><span>Sangat cepat, 5 monster, peta kompleks</span></div>
+          <div class="diff-row"><span class="diff-badge lv5">LV 5</span><span>EKSTREM, 6 monster cepat, peta terbesar</span></div>
+        </div>
+        <button class="btn-back" id="btn-back-howto">◀ KEMBALI</button>
+      </div>
+    </div>
+
+    <!-- SCREEN: GAME -->
+    <div id="screen-game" class="screen">
+      <div class="game-header">
+        <div class="hud-left">
+          <div class="hud-item">
+            <span class="hud-label">LEVEL</span>
+            <span class="hud-val" id="hud-level">1</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">NYAWA</span>
+            <span class="hud-val" id="hud-hp">❤️❤️❤️</span>
+          </div>
+        </div>
+        <div class="hud-center">
+          <div class="hud-item">
+            <span class="hud-label">ITEM</span>
+            <span class="hud-val"><span id="hud-items">0</span>/<span id="hud-items-total">3</span></span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">KUNCI</span>
+            <span class="hud-val" id="hud-key">❌</span>
+          </div>
+        </div>
+        <div class="hud-right">
+          <div class="hud-item">
+            <span class="hud-label">SKOR</span>
+            <span class="hud-val" id="hud-score">0</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">WAKTU</span>
+            <span class="hud-val" id="hud-time">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        <div id="level-announce" class="level-announce hidden">
+          <div class="announce-inner">
+            <span id="announce-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <span class="ctrl-hint">W A S D → Gerak</span>
+        <button class="btn-small" id="btn-menu-ingame">🏠 Menu</button>
+        <button class="btn-small" id="btn-restart-ingame">🔄 Ulang</button>
+      </div>
+    </div>
+
+    <!-- SCREEN: WIN -->
+    <div id="screen-win" class="screen">
+      <div class="result-content win">
+        <div class="result-icon">🎉</div>
+        <h2 id="win-title">LEVEL SELESAI!</h2>
+        <div class="result-stats">
+          <div class="stat-row"><span>Waktu</span><span id="win-time">0s</span></div>
+          <div class="stat-row"><span>Skor Level</span><span id="win-score">0</span></div>
+          <div class="stat-row"><span>Total Skor</span><span id="win-total">0</span></div>
+        </div>
+        <div class="star-rating" id="win-stars">⭐⭐⭐</div>
+        <div class="result-buttons">
+          <button class="btn-result" id="btn-next-level">LEVEL BERIKUTNYA ▶</button>
+          <button class="btn-result secondary" id="btn-menu-win">🏠 Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN: GAME OVER -->
+    <div id="screen-gameover" class="screen">
+      <div class="result-content over">
+        <div class="result-icon">💀</div>
+        <h2>GAME OVER</h2>
+        <p id="go-message">Kamu terkena monster!</p>
+        <div class="result-stats">
+          <div class="stat-row"><span>Level</span><span id="go-level">1</span></div>
+          <div class="stat-row"><span>Skor</span><span id="go-score">0</span></div>
+          <div class="stat-row"><span>Best</span><span id="go-best">0</span></div>
+        </div>
+        <div class="result-buttons">
+          <button class="btn-result" id="btn-retry">🔄 COBA LAGI</button>
+          <button class="btn-result secondary" id="btn-menu-over">🏠 Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN: ALL CLEAR -->
+    <div id="screen-allclear" class="screen">
+      <div class="result-content allclear">
+        <div class="result-icon animate-bounce">🏆</div>
+        <h2>ALL STAGES<br />CLEARED!</h2>
+        <p>Kamu telah menaklukkan semua level!</p>
+        <div class="result-stats">
+          <div class="stat-row"><span>Total Skor</span><span id="ac-score">0</span></div>
+          <div class="stat-row"><span>Best Score</span><span id="ac-best">0</span></div>
+        </div>
+        <div class="fireworks">🎆🎇✨🎊🎉</div>
+        <div class="result-buttons">
+          <button class="btn-result" id="btn-play-again">▶ MAIN LAGI</button>
+          <button class="btn-result secondary" id="btn-menu-allclear">🏠 Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="images.js"></script>
+    <script src="levels.js"></script>
+    <script src="game.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>
